@@ -6,11 +6,11 @@
 %l0: the natural length of the spring
 %OUTPUTS:
 %F: the force exerted by the spring at end B
-function F = compute_spring_force(k,l0,PA,PB)
+function F = compute_spring_force_tabby(k,l0,PA,PB)
     %current length of the spring
-    l = abs(PB-PA)
+    l = norm(PB-PA);
     %unit vector pointing from PA to PB
-    e_s = (PB-PA)/l
+    e_s = (PB-PA)/l;
     %Force exerted by spring at point B
-    F = -k*abs(l -l0)*e_s
+    F = -k*(l -l0)*e_s; 
 end
