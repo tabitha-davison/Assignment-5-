@@ -13,7 +13,7 @@ function simulate_box()
     Pbl2_world = Pbl_box + [LG;-LG];
     Pbr1_world = Pbr_box + [0;-l0];
     Pbr2_world = Pbr_box + [l0;0];
-    P_world = [Pbl1_world,Pbl2_world,Pbr1_world,Pbr2_world];
+    P_world = [Pbl1_world,Pbl2_world,Pbr1_world,Pbr2_world]
     P_box = [Pbl_box,Pbl_box,Pbr_box,Pbr_box];
     %define system parameters
     box_params = struct();
@@ -41,4 +41,21 @@ function simulate_box()
 
     %run the integration
     [tlist,Vlist] = ode45(my_rate_func,tspan,V0);
+
+
+    for i = 1:(length(Vlist)-1)
+        clf
+        num_zigs = 5;
+        w = .1;
+        hold on;
+        spring_plot_struct = initialize_spring_plot(num_zigs,w);
+        axis equal; axis square;
+        axis([-15,15,-15,15]);
+        % [Vlist(i,1), Vlist(i,2)]
+        box_corners = compute_rbt_tabby(Vlist(i,1), Vlist(i,2), Vlist(i,3), boundary_pts);
+        [box_corners(1), box_corners(2)]
+        % spring_plotting(num_zigs, w, [P_world(1),P_world(2)], [box_corners(1), box_corners(1)]);
+        update_spring_plot(spring_plot_struct,[P_world(1),P_world(2)], [box_corners(1), box_corners(2)])
+        drawnow
+    end
 end
