@@ -29,32 +29,28 @@ LW = 10; LH = 1; LG = 3;
 
     my_linear_rate = @(t_in,V_in) J_approx*(V_in-V_eq);
 
-
-% What we did before was totally wrong. We find Veq by applying newton solver
-% and then we use the intregator, where time matters. Idk if this is ODE45 or what 
-
     
-%     Veq = multiNewton(my_linear_rate,0);
+    dx0 = 1.5;
+    dy0 = 1;
+    dtheta0 = 0.435;
+    vx0 = 0;
+    vy0 = 0;
+    vtheta0 = 0;
 
-%     dx0 = 1.5;
-%     dy0 = 1;
-%     dtheta0 = 0.435;
-%     vx0 = 0;
-%     vy0 = 0;
-%     vtheta0 = 0;
-% 
-%     Veq = [dx0; dy0; dtheta0; 0; 0; 0];
+    Veq = [dx0; dy0; dtheta0; 0; 0; 0];
 
 
     %small number used to scale initial perturbation
-%     epsilon = 0.000001;
-%     V0 = Veq + epsilon*[dx0;dy0;dtheta0;vx0;vy0;vtheta0];
-%     tspan = [0 10];
-%     
-%     my_rate_func = @(t_in, V_in) box_rate_func_tabby(t_in, V_in,box_params);
-%     
-% [tlist_nonlinear,Vlist_nonlinear] = your_integrator(my_rate_func,tspan,V0,...);
-% 
-% [tlist_linear,Vlist_linear] = your_integrator(my_linear_rate,tspan,V0,...);
+    epsilon = 0.000001;
+    V0 = Veq + epsilon*[dx0;dy0;dtheta0;vx0;vy0;vtheta0];
+    tspan = [0 10];
+    
+    my_rate_func = @(t_in, V_in) box_rate_func_tabby(t_in, V_in,box_params);
+    
+% [tlist_nonlinear,Vlist_nonlinear] =...
+% your_integrator(my_rate_func,tspan,V0,...);
+%run the integration of linear system
+% [tlist_linear,Vlist_linear] =...
+% your_integrator(my_linear_rate,tspan,V0,...);
 
 end
