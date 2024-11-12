@@ -19,8 +19,11 @@
 %dVdt = [dxdt;dydt;dthetadt;d2xdt2;d2ydt2;d2thetadt2]:
 % the time derivative of the state vector
 function dVdt = box_rate_func_tabby(t,V,box_params)
+    x = V(1);
+    y = V(2);
+    theta = V(3);
 
-    [ax,ay,atheta] = compute_accel(x,y,theta,box_params);
+    [ax,ay,atheta] = compute_accel_tabby(x,y,theta,box_params);
     
     dVdt = [V(4); V(5); V(6); ax; ay; atheta];
 

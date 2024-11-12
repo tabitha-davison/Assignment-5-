@@ -9,7 +9,7 @@
 %OUTPUTS:
 %Plist_world: a 2 x n matrix of points describing
 %the world-frame coordinates of the points in Plist_box
-function Plist_world = compute_rbt(x,y,theta,Plist_box)
+function Plist_world = compute_rbt_tabby(x,y,theta,Plist_box)
 
 Rotation_matrix = [cos(theta), -sin(theta); sin(theta), cos(theta)];
 

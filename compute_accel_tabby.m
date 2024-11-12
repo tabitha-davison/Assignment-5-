@@ -22,7 +22,7 @@
 %atheta: angular acceleration of the box
 function [ax,ay,atheta] = compute_accel_tabby(x,y,theta,box_params)
 
-    num_of_springs = length(k_list);
+    num_of_springs = length(box_params.k_list);
     % Force_x= [];
     % Force_y= [];
     
