@@ -1,4 +1,4 @@
-function [root, num_evals] = multiNewton(test_function01,X0,varargin)
+function [root] = multiNewton(test_function01,X0,varargin)
     %{
     arguements    
         func: testing function containing equations for line and derivative
@@ -59,7 +59,7 @@ function [root, num_evals] = multiNewton(test_function01,X0,varargin)
         J0 = J;
         
     end
-    num_evals = 1;
+
 end
 
 function J = approximate_jacobian(fun, x)
@@ -82,5 +82,5 @@ function J = approximate_jacobian(fun, x)
         % Approximate the j-th column of the Jacobian
         J(:, j) = (f_plus - f_minus) / (2 * delta_x);
     end
-    num_evals = 1;
+
 end
