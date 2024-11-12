@@ -40,5 +40,5 @@ function simulate_box()
     tspan = [0 10];
 
     %run the integration
-    [tlist,Vlist] = ode45(my_rate_func,tspan,V0)
+    [tlist,Vlist] = ode45(my_rate_func,tspan,V0);
 end
