@@ -6,16 +6,30 @@
 % P1: Location of the first end of the spring
 % P2: Location of the second end of the spring
 % theta_step: step size for theta list
-function spring_plotting(num_zigs, w, theta_step, P1, P2)
-    hold on;
-    spring_plot_struct = initialize_spring_plot(num_zigs,w);
-    axis equal; axis square;
-    axis([-3,3,-3,3]);
-    for theta=linspace(0,theta_step,1000)
-        update_spring_plot(spring_plot_struct,P1,P2)
-        drawnow;
-    end
+function spring_plotting()
+num_zigs = 5;
+w = .1;
+hold on;
+spring_plot_struct = initialize_spring_plot(num_zigs,w);
+axis equal; axis square;
+axis([-3,3,-3,3]);
+for theta=linspace(0,6*pi,1000)
+P1 = [.5;.5];
+P2 = 2*[cos(theta);sin(theta)];
+update_spring_plot(spring_plot_struct,P1,P2)
+drawnow;
 end
+end
+% function spring_plotting(num_zigs, w, theta_step, P1, P2)
+%     hold on;
+%     spring_plot_struct = initialize_spring_plot(num_zigs,w);
+%     axis equal; axis square;
+%     axis([-3,3,-3,3]);
+%     for theta=linspace(0,theta_step,1000)
+%         update_spring_plot(spring_plot_struct,P1,P2)
+%         drawnow;
+%     end
+% end
 
 %updates spring plotting object so that spring is plotted
 %with ends located at points P1 and P2
