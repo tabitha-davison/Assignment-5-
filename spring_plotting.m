@@ -1,4 +1,5 @@
 % Plots spring
+% 
 % INPUTS:
 % num_zigs: number of zig zags in spring drawing
 % w: width of the spring drawing
