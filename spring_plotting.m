@@ -1,27 +1,14 @@
-function spring_plotting_example()
-    num_zigs = 5;
-    w = .1;
+function spring_plotting(num_zigs, w, theta_param, P1, P2)
     hold on;
     spring_plot_struct = initialize_spring_plot(num_zigs,w);
     axis equal; axis square;
     axis([-3,3,-3,3]);
-    for theta=linspace(0,6*pi,1000)
-<<<<<<< Updated upstream
-        P1 = [.5;.5];
-        P2 = 2*[cos(theta);sin(theta)];
+    for theta=linspace(0,theta_param,1000)
         update_spring_plot(spring_plot_struct,P1,P2)
         drawnow;
     end
 end
 
-=======
-    P1 = [.5;.5];
-    P2 = 2*[cos(theta);sin(theta)];
-    update_spring_plot(spring_plot_struct,P1,P2)
-    drawnow;
-end
-end
->>>>>>> Stashed changes
 %updates spring plotting object so that spring is plotted
 %with ends located at points P1 and P2
 function update_spring_plot(spring_plot_struct,P1,P2)
@@ -35,10 +22,7 @@ function update_spring_plot(spring_plot_struct,P1,P2)
     'xdata',[P1(1),P2(1)],...
     'ydata',[P1(2),P2(2)]);
 end
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 %create a struct containing plotting info for a single spring
 %INPUTS:
 %num_zigs: number of zig zags in spring drawing
@@ -56,12 +40,6 @@ function spring_plot_struct = initialize_spring_plot(num_zigs,w)
     zig_zag(1,:)=(zig_zag(1,:)-zig_zag(1,1))/(zig_zag(1,end)-zig_zag(1,1));
     zig_zag(2,:)=zig_zag(2,:)*w;
     spring_plot_struct.zig_zag = zig_zag;
-<<<<<<< Updated upstream
     spring_plot_struct.line_plot = plot(0,0,'k','linewidth',2);
     spring_plot_struct.point_plot = plot(0,0,'ro','markerfacecolor','r','markersize',7);
 end
-=======
-    spring_plot_struct.line_plot = plot(0,0,’k’,’linewidth’,2);
-    spring_plot_struct.point_plot = plot(0,0,’ro’,’markerfacecolor’,’r’,’markersize’,7);
-end
->>>>>>> Stashed changes
