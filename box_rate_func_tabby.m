@@ -24,5 +24,4 @@ function dVdt = box_rate_func_tabby(t,V,box_params)
     
     dVdt = [V(4); V(5); V(6); ax; ay; atheta];
 
-
 end
