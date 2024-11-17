@@ -5,7 +5,7 @@ function modal_anal(Q, Veq, my_rate_func, t)
     %small numbers
     epsilon = 1e-5;
     V0 = Veq + epsilon*[U_mode;0;0;0];
-    tspan = linspace(t(1),1,t(end));
+    tspan = linspace(t(1,200,1);
     
     %run the integration of nonlinear system
     [tlist_nonlinear,Vlist_nonlinear] = ode45(my_rate_func,tspan,V0);
