@@ -2,7 +2,7 @@ function modal_anal(Q, Veq, my_rate_func)
 
     [U_mode,omega_n] = eig(Q, my_rate_func);
     
-    %small number
+    %small numbers
     epsilon = 1e-5;
     V0 = Veq + epsilon*[U_mode;0;0;0];
     tspan = linspace(1,200,1);
