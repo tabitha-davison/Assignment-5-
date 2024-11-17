@@ -47,41 +47,50 @@ function simulate_box()
 
     num_zigs = 5;
     w = .1;
+    spring_plot_struct = initialize_spring_plot(num_zigs,w);
 
+    figure;
+    hold on;
+    axis equal;
     axis([-10, 10, -7, 7]);
 
     for i = 1:(length(Vlist)-1)
 
         box_corners = compute_rbt_tabby(Vlist(i,1), Vlist(i,2), Vlist(i,3), boundary_pts);
 
-        clf;
-        hold on;
-        axis equal;
-        axis([-10, 10, -7, 7]);
-
         plot(box_params.P_world(1, :), box_params.P_world(2, :), 'ko', 'MarkerFaceColor', 'k');  % Static anchor points
         plot([box_corners(1, :), box_corners(1, 1)], [box_corners(2, :), box_corners(2, 1)], 'b-', 'LineWidth', 2);
 
+        % update_spring_plot(spring_plot_struct,[P_world(1),P_world(2)], [box_corners(1), box_corners(2)])
+        % update_spring_plot(spring_plot_struct,[P_world(3),P_world(4)], [box_corners(3), box_corners(4)])
+        % update_spring_plot(spring_plot_struct,[P_world(1),P_world(2)], [box_corners(5), box_corners(6)])
+        % update_spring_plot(spring_plot_struct,[P_world(3),P_world(4)], [box_corners(7), box_corners(8)])
+        % drawnow
+
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
-
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 1), box_corners(:, 1));
+        S1 = box_params.P_world(:, 1);
+        S2 = box_corners(:, 1);
+        update_spring_plot(spring_plot_struct, S1, S2);
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
-
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 2), box_corners(:, 1));
+        S3 = box_params.P_world(:, 2);
+        S4 = box_corners(:, 1);
+        update_spring_plot(spring_plot_struct, S3, S4);
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
-
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 3), box_corners(:, 2));
+        S5 = box_params.P_world(:, 3);
+        S6 = box_corners(:, 2);
+        update_spring_plot(spring_plot_struct, S5, S6);
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
-
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 4), box_corners(:, 2));
+        S7 = box_params.P_world(:, 4);
+        S8 = box_corners(:, 2);
+        update_spring_plot(spring_plot_struct, S7, S8);
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
-
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 6), box_corners(:, 3));
+        S9 = box_params.P_world(:, 6);
+        S10 = box_corners(:, 3);
+        update_spring_plot(spring_plot_struct, S9, S10);
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
-
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 5), box_corners(:, 4));
-
+        S11 = box_params.P_world(:, 5);
+        S12 = box_corners(:, 4);
+        update_spring_plot(spring_plot_struct, S11, S12);
         drawnow;
-
     end
 end
