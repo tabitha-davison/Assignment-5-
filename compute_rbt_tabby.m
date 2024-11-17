@@ -13,7 +13,8 @@ function Plist_world = compute_rbt_tabby(x,y,theta,Plist_box)
 
     Rotation_matrix = [cos(theta), -sin(theta); sin(theta), cos(theta)];
 
-    Plist_world = Rotation_matrix*Plist_box + repmat([x;y],[1,size(Plist_box,2)]);
+    % Plist_world = Rotation_matrix*Plist_box + repmat([x;y],[1,size(Plist_box,2)]);
+    Plist_world = Rotation_matrix*Plist_box + [x;y];
     
     % Plist_world = Rotation_matrix.*Plist_box;
     % Plist_world(1,:)=Plist_world(1,:)+x;
