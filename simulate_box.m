@@ -1,8 +1,8 @@
-function simulate_box()
+function [tlist, Vlist, box_params] = simulate_box()
 
     LW = 10; LH = 1; LG = 3;
     m = 1; Ic = (1/12)*(LH^2+LW^2);
-    g = 1; k = 20; k_list = [.5*k,.5*k,2*k,5*k];
+    g = 9.81; k = 20; k_list = [.5*k,.5*k,2*k,5*k,.5*k,.5*k,2*k,5*k];
     l0 = 1.5*LG;
     Pbl_box = [-LW;-LH]/2;
     Pbr_box = [LW;-LH]/2;
@@ -14,9 +14,11 @@ function simulate_box()
     Pbr1_world = Pbr_box + [0;-l0];
     Pbr2_world = Pbr_box + [l0;0];
     Ptl1_world = Ptl_box + [-l0; l0];
+    Ptl2_world = Ptl_box + [-l0; 0];
     Ptr1_world = Pbr_box + [l0;l0];
+    Ptr2_world = Pbr_box + [0;l0];
     
-    P_world = [Pbl1_world,Pbl2_world,Pbr1_world,Pbr2_world, Ptl1_world, Ptr1_world];
+    P_world = [Pbl1_world,Pbl2_world,Pbr1_world,Pbr2_world, Ptl1_world, Ptl2_world, Ptr1_world, Ptr2_world];
     P_box = [Pbl_box,Pbl_box,Pbr_box,Pbr_box];
     %define system parameters
     box_params = struct();
@@ -34,9 +36,9 @@ function simulate_box()
     my_rate_func = @(t_in,V_in) box_rate_func_tabby(t_in,V_in,box_params);
     x0 = 0;
     y0 = 0;
-    theta0 = 0;
-    vx0 = 0;
-    vy0 = 0;
+    theta0 = pi/6;
+    vx0 = 5;
+    vy0 = 5;
     omega0 = 0;
     
     V0 = [x0;y0;theta0;vx0;vy0;omega0];
@@ -48,8 +50,6 @@ function simulate_box()
     num_zigs = 5;
     w = .1;
 
-    axis([-10, 10, -7, 7]);
-
     for i = 1:(length(Vlist)-1)
 
         box_corners = compute_rbt_tabby(Vlist(i,1), Vlist(i,2), Vlist(i,3), boundary_pts);
@@ -57,7 +57,7 @@ function simulate_box()
         clf;
         hold on;
         axis equal;
-        axis([-10, 10, -7, 7]);
+        axis([-15, 15, -15, 15]);
 
         plot(box_params.P_world(1, :), box_params.P_world(2, :), 'ko', 'MarkerFaceColor', 'k');  % Static anchor points
         plot([box_corners(1, :), box_corners(1, 1)], [box_corners(2, :), box_corners(2, 1)], 'b-', 'LineWidth', 2);
@@ -76,10 +76,16 @@ function simulate_box()
         update_spring_plot(spring_plot_struct, box_params.P_world(:, 4), box_corners(:, 2));
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
 
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 6), box_corners(:, 3));
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 5), box_corners(:, 4));
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
 
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 5), box_corners(:, 4));
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 6), box_corners(:, 4));
+        spring_plot_struct = initialize_spring_plot(num_zigs, w);
+
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 7), box_corners(:, 3));
+        spring_plot_struct = initialize_spring_plot(num_zigs, w);
+
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 8), box_corners(:, 3));
 
         drawnow;
 
