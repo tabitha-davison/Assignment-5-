@@ -33,25 +33,24 @@ function [ax,ay,atheta] = compute_accel_tabby(x,y,theta,box_params)
     force_total = [0;-box_params.m*box_params.g];
     torque_total = 0;
 
-    for i = 1:length(num_of_springs)
+    for i = 1:(num_of_springs)
         k = box_params.k_list(i);
         l0 = box_params.l0_list(i);
         PA = PA_list(:,i);
-        PB = PB_list(:,i);
+        PB = PB_list(:,4);
 
         moment_arm = PB-PC;
 
         spring_force = compute_spring_force_tabby(k,l0,PA,PB);
-        spring_torque = moment_arm(1)*spring_force(2)-moment_arm(2)*spring_force(1);
+        spring_torque = moment_arm(1)*spring_force(2)-moment_arm(2)*spring_force(1)
+        spring_torque = cross([moment_arm; 0], [spring_force; 0]);
         
         force_total = force_total+spring_force;
-        torque_total = torque_total+spring_torque;
+        torque_total = torque_total+spring_torque
         
-
-    
     end
         
         ax = force_total(1)/box_params.m;
         ay = force_total(2)/box_params.m;
-        atheta = torque_total/box_params.I;
+        atheta = torque_total(1)/box_params.I;
 end
