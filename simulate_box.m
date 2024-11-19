@@ -1,8 +1,8 @@
 function simulate_box()
 
     LW = 10; LH = 1; LG = 3;
-    m = 0.3; Ic = (1/12)*(LH^2+LW^2);
-    g = 9.81; k = 20; k_list = 20*[.5*k,.5*k,.5*k,.5*k,.5*k,.5*k,.5*k,.5*k];
+    m = 0.03; Ic = (1/12)*(LH^2+LW^2);
+    g = 9.81; k = 20; k_list = [5*k,5*k,5*k,5*k,5*k,5*k,5*k,5*k];
     l0 = 1.5*LG;
     Pbl_box = [-LW;-LH]/2;
     Pbr_box = [LW;-LH]/2;
@@ -18,8 +18,8 @@ function simulate_box()
     Ptr1_world = Pbr_box + [l0;l0];
     Ptr2_world = Pbr_box + [0;l0];
     
-    P_world = [Pbl1_world,Pbl2_world,Pbr1_world,Pbr2_world, Ptl1_world, Ptl2_world, Ptr1_world, Ptr2_world];
-    P_box = [Pbl_box,Pbl_box,Pbr_box,Pbr_box, Ptl_box, Ptl_box, Ptr_box, Ptr_box];
+    P_world = [Pbl1_world,Pbl2_world,Pbr1_world,Pbr2_world, Ptr1_world, Ptr2_world, Ptl1_world, Ptl2_world];
+    P_box = [Pbl_box,Pbl_box,Pbr_box,Pbr_box, Ptr_box, Ptr_box, Ptl_box, Ptl_box];
     %define system parameters
     box_params = struct();
     box_params.m = m;
@@ -76,16 +76,16 @@ function simulate_box()
         update_spring_plot(spring_plot_struct, box_params.P_world(:, 4), box_corners(:, 2));
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
 
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 5), box_corners(:, 4));
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 5), box_corners(:, 3));
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
 
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 6), box_corners(:, 4));
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 6), box_corners(:, 3));
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
 
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 7), box_corners(:, 3));
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 7), box_corners(:, 4));
         spring_plot_struct = initialize_spring_plot(num_zigs, w);
 
-        update_spring_plot(spring_plot_struct, box_params.P_world(:, 8), box_corners(:, 3));
+        update_spring_plot(spring_plot_struct, box_params.P_world(:, 8), box_corners(:, 4));
 
         drawnow;
 
