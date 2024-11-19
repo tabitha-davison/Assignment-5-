@@ -30,6 +30,7 @@ function [root] = multiNewton(test_function01,X0,varargin)
 
         % zero slope check
         if abs(det(J0*J0')) <= thresholds(1)
+            x = 1
             return
         end
 

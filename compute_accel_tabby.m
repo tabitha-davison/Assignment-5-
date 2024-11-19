@@ -42,11 +42,11 @@ function [ax,ay,atheta] = compute_accel_tabby(x,y,theta,box_params)
         moment_arm = PB-PC;
 
         spring_force = compute_spring_force_tabby(k,l0,PA,PB)
-        % spring_torque = moment_arm(1)*spring_force(2)-moment_arm(2)*spring_force(1)
-        spring_torque = cross([moment_arm; 0], [spring_force; 0]);
+        spring_torque = moment_arm(1)*spring_force(2)-moment_arm(2)*spring_force(1)
+        % spring_torque = cross([moment_arm; 0], [spring_force; 0]);
         
         force_total = force_total+spring_force;
-        torque_total = torque_total+spring_torque
+        torque_total = torque_total+spring_torque;
         
     end
         
