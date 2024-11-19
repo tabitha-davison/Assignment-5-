@@ -2,7 +2,7 @@ function simulate_box()
 
     LW = 10; LH = 1; LG = 3;
     m = 0.3; Ic = (1/12)*(LH^2+LW^2);
-    g = 9.81; k = 20; k_list = 200*[5*k,5*k,5*k,5*k,5*k,5*k,5*k,5*k];
+    g = 9.81; k = 20; k_list = 20*[.5*k,.5*k,.5*k,.5*k,.5*k,.5*k,.5*k,.5*k];
     l0 = 1.5*LG;
     Pbl_box = [-LW;-LH]/2;
     Pbr_box = [LW;-LH]/2;

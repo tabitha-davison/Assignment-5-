@@ -1,7 +1,7 @@
 
 function non_linear_system()
 
-LW = 10; LH = 1; LG = 3;
+    LW = 10; LH = 1; LG = 3;
     m = 1; Ic = (1/12)*(LH^2+LW^2);
     g = 1; k = 20; k_list = [.5*k,.5*k,2*k,5*k];
     l0 = 1.5*LG;

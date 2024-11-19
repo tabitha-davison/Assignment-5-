@@ -8,9 +8,11 @@
 %F: the force exerted by the spring at end B
 function F = compute_spring_force_tabby(k,l0,PA,PB)
     %current length of the spring
-    l = norm(PB-PA);
+    lx = (PB(1)-PA(1));
+    ly = (PB(2)-PA(2));
+    l = sqrt(lx^2+ly^2);
     %unit vector pointing from PA to PB
     e_s = (PB-PA)/l;
     %Force exerted by spring at point B
-    F = -k*(l -l0)*e_s; 
+    F = -k*(l -l0).*e_s; 
 end
